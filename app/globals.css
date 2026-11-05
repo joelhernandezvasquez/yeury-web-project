@@ -1,30 +1,72 @@
 @import "./fonts.css";
-html {
-  scroll-behavior: smooth;
+
+/*
+ * Tailwind v4 without preflight: the page was designed against browser defaults,
+ * so only the theme + utilities layers are loaded. Global rules below live in
+ * `@layer base` so utility classes override them, like inline styles used to.
+ */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@theme {
+  /* Breakpoints used by the layout (mobile-first). */
+  --breakpoint-md: 760px;
+  --breakpoint-lg: 1060px;
+
+  --font-body: Montserrat, sans-serif;
+  --font-display: "Playfair Display", serif;
+
+  --color-cream: #f6ecdd;
+  --color-paper: #fbf4e8;
+  --color-parchment: #efe2cc;
+  --color-linen: #f1dfc4;
+  --color-wheat: #f3ddb0;
+  --color-gold: #c9a45c;
+  --color-gold-light: #e9cf98;
+  --color-ember: #d9782d;
+  --color-burgundy: #7a1e1e;
+  --color-olive: #5f6b45;
+  --color-olive-dark: #4e5938;
+  --color-ink: #2b1a14;
+  --color-walnut: #4a3328;
+  --color-bark: #5a3d30;
+  --color-cocoa: #6b4a3a;
 }
-body {
-  margin: 0;
-  background: #f6ecdd;
-  color: #2b1a14;
-  font-family: Montserrat, sans-serif;
-  -webkit-font-smoothing: antialiased;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    background: #f6ecdd;
+    color: #2b1a14;
+    font-family: Montserrat, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  a {
+    color: #7a1e1e;
+    text-decoration: none;
+  }
+  a:hover {
+    color: #d9782d;
+  }
+  input,
+  select,
+  textarea,
+  button {
+    font-family: inherit;
+  }
+  html,
+  body {
+    height: 100%;
+  }
 }
-* {
-  box-sizing: border-box;
-}
-a {
-  color: #7a1e1e;
-  text-decoration: none;
-}
-a:hover {
-  color: #d9782d;
-}
-input,
-select,
-textarea,
-button {
-  font-family: inherit;
-}
+
 @keyframes cfKen {
   from {
     transform: scale(1.02);
@@ -66,8 +108,4 @@ button {
   * {
     animation: none !important;
   }
-}
-html,
-body {
-  height: 100%;
 }

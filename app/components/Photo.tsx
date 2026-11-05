@@ -9,7 +9,13 @@ const PHOTOS: Record<string, { src: string; position?: string }> = {
   "buffet-photo": { src: "/images/buffet-photo.webp", position: "50% 26%" },
 };
 
-export default function Photo({ id, placeholder }: { id: string; placeholder?: string }) {
+export default function Photo({
+  id,
+  placeholder,
+}: {
+  id: string;
+  placeholder?: string;
+}) {
   const photo = PHOTOS[id];
   if (!photo) {
     return (
@@ -17,11 +23,7 @@ export default function Photo({ id, placeholder }: { id: string; placeholder?: s
         data-photo-slot={id}
         aria-hidden="true"
         title={placeholder}
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: "linear-gradient(135deg,#EBDDC5,#E2CFB1)",
-        }}
+        className="absolute inset-0 bg-[linear-gradient(135deg,#EBDDC5,#E2CFB1)]"
       />
     );
   }
@@ -31,14 +33,8 @@ export default function Photo({ id, placeholder }: { id: string; placeholder?: s
       src={photo.src}
       alt=""
       loading={id === "hero-buffet" ? "eager" : "lazy"}
-      style={{
-        position: "absolute",
-        inset: 0,
-        width: "100%",
-        height: "100%",
-        objectFit: "cover",
-        objectPosition: photo.position ?? "50% 50%",
-      }}
+      className="absolute inset-0 w-full h-full object-cover"
+      style={{ objectPosition: photo.position ?? "50% 50%" }}
     />
   );
 }

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import "./hover.css";
 
 export const metadata: Metadata = {
   title: "Casey Foodny · Catering & Treats",
