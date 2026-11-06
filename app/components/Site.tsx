@@ -13,13 +13,13 @@ import { submitContactForm, PKG_VALUES } from "./site/contactForm";
 // Below this width the mobile layout (hamburger menu etc.) is rendered.
 const MOBILE_BREAKPOINT = 760;
 const WA = "https://wa.me/19148045458";
-const NAV_IDS = ["#menu", "#paquetes", "#eventos", "#galeria", "#contacto"];
+const NAV_IDS = ["#paquetes", "#menu", "#eventos", "#galeria", "#contacto"];
 const SERVICE_LINKS = ["#paquetes", "#picaderas", "#eventos", "#menu"];
-const SERVICE_ICONS = [
-  ["30px", "30px", "50%"],
-  ["30px", "20px", "4px"],
-  ["30px", "16px", "16px 16px 2px 2px"],
-  ["18px", "18px", "2px"],
+const SERVICE_PHOTOS = [
+  "dish-chicken",
+  "tray-photo",
+  "buffet-photo",
+  "dish-shrimp",
 ];
 const DISH_IDS = ["dish-shortribs", "dish-shrimp", "dish-chicken"];
 const DISH_PLACEHOLDERS = [
@@ -58,6 +58,7 @@ export default class Site extends React.Component<any, any> {
     menuOpen: false,
     sent: false,
     pkg: "c46",
+    bOpen: false,
     mode: "pickup",
     name: "",
   };
@@ -176,9 +177,7 @@ export default class Site extends React.Component<any, any> {
       services: t.services.map((name, i) => ({
         name,
         href: SERVICE_LINKS[i],
-        iw: SERVICE_ICONS[i][0],
-        ih: SERVICE_ICONS[i][1],
-        ir: SERVICE_ICONS[i][2],
+        photo: SERVICE_PHOTOS[i],
       })),
     };
   }
@@ -252,7 +251,16 @@ export default class Site extends React.Component<any, any> {
     return {
       pkg: this.state.pkg,
       onPkg: (e) => this.setState({ pkg: e.target.value }),
-      pkgOptions: t.pkgOpts.map((label, i) => ({ label, v: PKG_VALUES[i] })),
+      // Form select shows four choices; the three dinner tiers collapse to one.
+      pkgOptions: [6, 3, 4, 5].map((i) => ({
+        label: t.pkgOpts[i],
+        v: PKG_VALUES[i],
+      })),
+      pkgSel: ["c46", "c811", "c1218"].includes(this.state.pkg)
+        ? "cena"
+        : this.state.pkg,
+      bOpen: this.state.bOpen,
+      openBuilder: () => this.setState({ bOpen: true }),
       modeBtn: {
         pBorder: p.b,
         pBg: p.bg,

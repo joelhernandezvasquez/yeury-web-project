@@ -5,6 +5,9 @@ import Photo from "./Photo";
 export default function renderTemplate(vals: any) {
   const {
     bCount,
+    bOpen,
+    openBuilder,
+    pkgSel,
     bDelivery,
     bEmpty,
     bGroups,
@@ -38,7 +41,6 @@ export default function renderTemplate(vals: any) {
     packages,
     pickEvent,
     pickTray,
-    pkg,
     pkgOptions,
     progRef,
     promo,
@@ -401,8 +403,9 @@ export default function renderTemplate(vals: any) {
                 className="flex flex-wrap gap-3 pointer-events-auto"
               >
                 <a
-                  href="#paquetes"
-
+                  href={waHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="
                     bg-olive text-cream
                     [transition:transform_.25s,box-shadow_.25s,background_.25s]
@@ -412,18 +415,18 @@ export default function renderTemplate(vals: any) {
                     hover:shadow-[0_12px_24px_rgba(95,_107,_69,_0.35)]
                   "
                 >
-                  {t.seePackages}
+                  {t.getQuote}
                 </a>
                 <a
-                  href="#ordenar"
-
+                  href="#paquetes"
                   className="
-                    border-[1.5px] border-solid border-gold text-cream
-                    font-semibold text-[15px] py-[15px] px-[26px] rounded-full
-                    bg-[rgba(43,26,20,.25)] hover:bg-cream hover:text-burgundy
+                    inline-flex items-center min-h-12 px-2 text-cream
+                    font-semibold text-[15px] hover:text-gold-light
+                    [text-decoration:underline] decoration-gold
+                    underline-offset-[6px]
                   "
                 >
-                  {t.getQuote}
+                  {t.seePackages} →
                 </a>
               </div>
             </div>
@@ -459,39 +462,54 @@ export default function renderTemplate(vals: any) {
                     href={s.href}
                     data-reveal="up"
                     data-stagger=""
-
                     className="
+                      group relative block aspect-[4/5] md:aspect-[3/4]
+                      overflow-hidden rounded-[12px] border border-solid
+                      border-[rgba(201,164,92,.5)] bg-parchment text-cream
                       [transition:transform_.35s,box-shadow_.35s,border-color_.35s]
-                      bg-paper border border-solid border-[rgba(201,164,92,.5)]
-                      rounded-[12px] pt-[26px] pb-[22px] px-[14px] flex flex-col
-                      items-center gap-[14px] text-center text-ink
                       shadow-[0_2px_10px_rgba(122,30,30,.05)] hover:border-gold!
                       hover:[transform:translateY(-2px)]!
-                      hover:shadow-[0_10px_24px_rgba(122,_30,_30,_0.1)]!
+                      hover:shadow-[0_18px_40px_rgba(43,26,20,.15)]!
                     "
                   >
                     <span
                       className="
-                        relative w-13 h-13 flex items-center justify-center
-                        border border-solid border-gold rounded-[50%]
+                        absolute inset-0 [transition:transform_.5s]
+                        group-hover:[transform:scale(1.05)]
+                      "
+                    >
+                      <Photo id={s.photo} />
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className="
+                        absolute inset-0
+                        [background:linear-gradient(180deg,rgba(43,26,20,0)_45%,rgba(43,26,20,.82)_100%)]
+                      "
+                    ></span>
+                    <span
+                      className="
+                        absolute left-0 right-0 bottom-0 p-[14px] md:p-5 flex
+                        items-end justify-between gap-2
                       "
                     >
                       <span
-                        className="border-[1.5px] border-solid border-gold"
-                        style={{
-                          width: s.iw,
-                          height: s.ih,
-                          borderRadius: s.ir,
-                        }}
-                      ></span>
-                    </span>
-                    <span
-                      className="
-                        font-display text-[16px] md:text-[19px] font-semibold
-                        text-burgundy leading-[1.2]
-                      "
-                    >
-                      {s.name}
+                        className="
+                          font-display text-[19px] md:text-[22px] font-semibold
+                          leading-[1.15] text-cream text-balance
+                        "
+                      >
+                        {s.name}
+                      </span>
+                      <span
+                        aria-hidden="true"
+                        className="
+                          text-gold-light text-[18px] leading-none pb-[3px]
+                          [transition:transform_.25s] group-hover:translate-x-1
+                        "
+                      >
+                        →
+                      </span>
                     </span>
                   </a>
                 </Fragment>
@@ -722,6 +740,7 @@ export default function renderTemplate(vals: any) {
             >
               <a
                 href="#arma"
+                onClick={openBuilder}
 
                 className="
                   flex items-center gap-[10px] font-semibold text-[15px]
@@ -741,7 +760,7 @@ export default function renderTemplate(vals: any) {
             "
           >
             <div className="max-w-[1200px] my-0 mx-auto">
-              {isMobile && (
+              {isMobile && bOpen && (
                 <>
                   <div
                     className="
@@ -806,6 +825,7 @@ export default function renderTemplate(vals: any) {
                   {t.b.sub}
                 </p>
               </div>
+              {bOpen ? (
               <div
                 className="
                   grid grid-cols-[1fr] md:grid-cols-[minmax(0,1fr)_380px] gap-5
@@ -1140,6 +1160,22 @@ export default function renderTemplate(vals: any) {
                   </div>
                 </aside>
               </div>
+              ) : (
+                <div className="flex justify-center">
+                  <button
+                    type="button"
+                    onClick={openBuilder}
+                    className="
+                      bg-cream text-burgundy font-semibold text-[15px] py-4
+                      px-7 rounded-full min-h-12 cursor-pointer border-0
+                      [transition:transform_.25s,background_.25s]
+                      hover:bg-gold-light hover:[transform:translateY(-2px)]
+                    "
+                  >
+                    {t.b.open} →
+                  </button>
+                </div>
+              )}
             </div>
           </section>
           <section
@@ -2029,7 +2065,7 @@ export default function renderTemplate(vals: any) {
                 >
                   {t.f.pkg}{" "}
                   <select
-                    value={pkg}
+                    value={pkgSel}
                     onChange={onPkg}
                     className="
                       text-[16px] font-medium normal-case tracking-[0] text-ink

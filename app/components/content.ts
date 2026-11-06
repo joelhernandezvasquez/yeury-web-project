@@ -12,7 +12,7 @@ export const T = {
       "Cenas familiares, picaderas y catering para eventos, hechos en casa con amor.",
     seePackages: "Ver paquetes",
     getQuote: "Pide tu cotización",
-    nav: ["Menú", "Paquetes", "Eventos", "Galería", "Contacto"],
+    nav: ["Paquetes", "Platos", "Eventos", "Galería", "Contacto"],
     services: [
       "Cenas Familiares",
       "Picaderas y Bandejas",
@@ -63,6 +63,7 @@ export const T = {
     },
     b: {
       linkPkg: "¿Quieres algo diferente? Arma tu propio menú",
+      open: "Armar mi menú",
       eyebrow: "Arma tu menú",
       title: "Crea tu cena a tu gusto",
       sub: "Elige los platos y la cantidad de personas, y envíanos tu menú. Te respondemos con tu cotización.",
@@ -197,6 +198,7 @@ export const T = {
       "Picadera",
       "Evento/Buffet",
       "Otro",
+      "Cena familiar",
     ],
     thanks: "¡Gracias! Te contactaremos pronto.",
     thanksDetail: (n) =>
@@ -244,7 +246,7 @@ export const T = {
       "Family dinners, party trays and event catering, homemade with love.",
     seePackages: "See packages",
     getQuote: "Get a quote",
-    nav: ["Menu", "Packages", "Events", "Gallery", "Contact"],
+    nav: ["Packages", "Dishes", "Events", "Gallery", "Contact"],
     services: [
       "Family Dinners",
       "Party Trays",
@@ -295,6 +297,7 @@ export const T = {
     },
     b: {
       linkPkg: "Want something different? Build your own menu",
+      open: "Build my menu",
       eyebrow: "Build your menu",
       title: "Create your dinner your way",
       sub: "Pick your dishes and number of guests, then send us your menu. We’ll reply with your quote.",
@@ -425,6 +428,7 @@ export const T = {
       "Party tray",
       "Event/Buffet",
       "Other",
+      "Family dinner",
     ],
     thanks: "Thank you! We’ll be in touch soon.",
     thanksDetail: (n) =>

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export const PKG_VALUES = ["c46", "c811", "c1218", "pic", "evt", "otro"];
+export const PKG_VALUES = ["c46", "c811", "c1218", "pic", "evt", "otro", "cena"];
 
 // Builds the WhatsApp message from the contact form and opens it.
 // Returns the state patch to apply once sent.
