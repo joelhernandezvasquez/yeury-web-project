@@ -9,6 +9,9 @@ const FROM: Record<string, string> = {
 
 type El = HTMLElement;
 
+// Hero fade-out parallax only runs at or above this viewport width (px).
+const HERO_FADE_MIN_WIDTH = 760;
+
 // Undo the scroll-reveal / animation setup on the DOM. React StrictMode (dev)
 // mounts, unmounts and re-mounts: without this the second mount skips every
 // element the first mount already hid, leaving it at opacity 0 forever.
@@ -96,6 +99,13 @@ export function startMotion(el: El, progEl: () => El | null) {
       el.querySelectorAll<El>("[data-parallax]").forEach((n) => {
         const v = n.dataset.parallax;
         if (v === "hero") {
+          // On mobile the CTAs sit below the fold, so fading the hero as you
+          // scroll would hide them right when they come into view.
+          if (window.innerWidth < HERO_FADE_MIN_WIDTH) {
+            n.style.transform = "";
+            n.style.opacity = "";
+            return;
+          }
           const k = Math.min(1, y / 600);
           n.style.transform = "translateY(" + y * 0.28 + "px)";
           n.style.opacity = String(1 - k * 0.9);

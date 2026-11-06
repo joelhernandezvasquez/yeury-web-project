@@ -7,16 +7,6 @@ export const T = {
     promoCta: "Reservar",
     heroEyebrow: "Catering dominicano · Westchester, NY",
     scroll: "Desliza",
-    marquee: [
-      "Pernil asado",
-      "Picadera mixta",
-      "Pastelón",
-      "Pollo cordon bleu",
-      "Moro",
-      "Short ribs",
-      "Camarones guisados",
-      "Flan",
-    ],
     heroTitle: "Sabor dominicano para tus celebraciones",
     heroSub:
       "Cenas familiares, picaderas y catering para eventos, hechos en casa con amor.",
@@ -249,16 +239,6 @@ export const T = {
     promoCta: "Book",
     heroEyebrow: "Dominican catering · Westchester, NY",
     scroll: "Scroll",
-    marquee: [
-      "Roasted pork",
-      "Mixed picadera",
-      "Plantain casserole",
-      "Chicken cordon bleu",
-      "Moro rice",
-      "Short ribs",
-      "Stewed shrimp",
-      "Flan",
-    ],
     heroTitle: "Dominican flavor for your celebrations",
     heroSub:
       "Family dinners, party trays and event catering, homemade with love.",

@@ -75,14 +75,6 @@
     transform: scale(1.14) translate(-1.5%, -1%);
   }
 }
-@keyframes cfMarq {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
 @keyframes cfPulse {
   0% {
     transform: scale(1);

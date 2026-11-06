@@ -52,6 +52,7 @@ export default class Site extends React.Component<any, any> {
       mode: "pickup",
     },
     waOpen: false,
+    waShow: false,
     lang: null,
     w: 1200,
     menuOpen: false,
@@ -74,6 +75,7 @@ export default class Site extends React.Component<any, any> {
     );
     this.ro.observe(el);
     this.motion = startMotion(el, () => this.progRef.current);
+    this.watchHero(el);
     this.paintTotal();
   }
   componentDidUpdate() {
@@ -82,8 +84,21 @@ export default class Site extends React.Component<any, any> {
   componentWillUnmount() {
     clearInterval(this.vInt);
     this.ro?.disconnect();
+    this.heroIo?.disconnect();
     this.motion?.stop();
     this.totalTween.stop();
+  }
+
+  // The floating WhatsApp button only appears once the hero is scrolled past.
+  watchHero(root) {
+    const hero = root.querySelector("#inicio");
+    if (!hero) return this.setState({ waShow: true }); // no hero (formOnly)
+    this.heroIo = new IntersectionObserver(([e]) =>
+      this.setState({
+        waShow: !e.isIntersecting && e.boundingClientRect.bottom <= 0,
+      }),
+    );
+    this.heroIo.observe(hero);
   }
 
   paintTotal() {
@@ -153,7 +168,6 @@ export default class Site extends React.Component<any, any> {
         sub: 300 + words.length * 90,
         btn: 450 + words.length * 90,
       },
-      marquee: [...t.marquee, ...t.marquee],
       showPromo: (this.props.showPromo ?? true) && !!promoT,
       promo: promoT
         ? { tag: promoT[0], text: promoT[1] }
@@ -206,7 +220,7 @@ export default class Site extends React.Component<any, any> {
       pickTray: go("pic"),
       pickEvent: go("evt"),
       steps: t.steps.map(([title, sub], i) => ({ n: i + 1, title, sub })),
-      ig: ["ig-1", "ig-2", "ig-3", "ig-4", "ig-5", "ig-6", "ig-7", "ig-8"],
+      ig: ["dish-shortribs", "tray-photo", "dish-shrimp", "dish-chicken"],
     };
   }
 
@@ -272,6 +286,7 @@ export default class Site extends React.Component<any, any> {
   whatsappVals(t) {
     return {
       waOpen: this.state.waOpen,
+      waShow: this.state.waShow,
       waLabel: !this.state.waOpen,
       toggleWa: () => this.setState((st) => ({ waOpen: !st.waOpen })),
       waHref: WA + "?text=" + encodeURIComponent(t.wa.openText),

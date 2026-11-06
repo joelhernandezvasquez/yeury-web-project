@@ -28,7 +28,6 @@ export default function renderTemplate(vals: any) {
     isDesktop,
     isMobile,
     langBtn,
-    marquee,
     menuOpen,
     modeBtn,
     nav,
@@ -69,6 +68,7 @@ export default function renderTemplate(vals: any) {
     waHref,
     waLabel,
     waOpen,
+    waShow,
     waSent,
   } = vals;
   return (
@@ -306,7 +306,7 @@ export default function renderTemplate(vals: any) {
           <section
             id="inicio"
             className="
-              relative min-h-[640px] md:min-h-[720px] flex items-end
+              relative min-h-[560px] md:min-h-[620px] flex items-end
               overflow-hidden bg-[#3a2219]
             "
           >
@@ -349,21 +349,6 @@ export default function renderTemplate(vals: any) {
                 pt-0 pb-12 px-5 md:pt-0 md:pb-22 md:px-8 text-cream
               "
             >
-              <div
-                data-reveal="zoom"
-                data-delay="0"
-                className="
-                  w-19 md:w-24 aspect-[1/1.12] rounded-[50%] bg-cream flex
-                  items-center justify-center mb-[22px]
-                  shadow-[0_0_0_4px_rgba(246,236,221,.25),0_12px_30px_rgba(0,0,0,.3)]
-                "
-              >
-                <img
-                  src="/images/logo-mark.png"
-                  alt=""
-                  className="w-[78%] h-auto block"
-                />
-              </div>
               <div
                 data-reveal="up"
                 data-delay="150"
@@ -461,37 +446,6 @@ export default function renderTemplate(vals: any) {
               </>
             )}
           </section>
-          <div
-            className="
-              bg-burgundy overflow-hidden
-              [border-top:1px_solid_var(--color-gold)]
-              [border-bottom:1px_solid_var(--color-gold)] py-[13px] px-0
-              md:py-[18px] md:px-0
-            "
-          >
-            <div
-              data-anim="cfMarq 40s linear infinite"
-              className="flex w-[max-content] will-change-transform"
-            >
-              {marquee.map((w: any, __i: number) => (
-                <Fragment key={__i}>
-                  <span
-                    className="
-                      flex items-center gap-7 pr-7 font-display italic
-                      text-[20px] md:text-[26px] text-cream whitespace-nowrap
-                    "
-                  >
-                    {w}
-                    <span
-                      className="
-                        w-[7px] h-[7px] bg-gold [transform:rotate(45deg)]
-                      "
-                    ></span>
-                  </span>
-                </Fragment>
-              ))}
-            </div>
-          </div>
           <section className="pt-7 pb-5 px-4 md:pt-10 md:pb-7 md:px-8 bg-cream">
             <div
               className="
@@ -782,7 +736,7 @@ export default function renderTemplate(vals: any) {
           <section
             id="arma"
             className="
-              scroll-mt-[70px] py-16 px-[18px] md:py-[104px] md:px-8 bg-ink
+              scroll-mt-[70px] pt-4 pb-16 px-[18px] md:py-[104px] md:px-8 bg-ink
               text-cream relative
             "
           >
@@ -791,7 +745,7 @@ export default function renderTemplate(vals: any) {
                 <>
                   <div
                     className="
-                      sticky top-18 z-5 mt-0 mb-[18px] mx-[-2px] flex
+                      mt-0 mb-[66px] mx-[-2px] flex
                       items-center justify-between gap-3 bg-burgundy border
                       border-solid border-gold rounded-full py-2 pr-2 pl-[18px]
                       shadow-[0_10px_24px_rgba(0,0,0,.35)]
@@ -1077,7 +1031,7 @@ export default function renderTemplate(vals: any) {
                   id="resumen"
                   data-reveal="up"
                   className="
-                    scroll-mt-[140px] relative md:sticky top-[100px] bg-paper
+                    scroll-mt-[140px] relative md:sticky md:top-[100px] bg-paper
                     text-ink border border-solid border-gold rounded-[16px]
                     shadow-[0_24px_60px_rgba(0,0,0,.35)] overflow-hidden
                   "
@@ -1553,6 +1507,7 @@ export default function renderTemplate(vals: any) {
               </div>
             </div>
           </section>
+          {vReal && (
           <section
             id="video"
             className="
@@ -1788,6 +1743,7 @@ export default function renderTemplate(vals: any) {
               </div>
             </div>
           </section>
+          )}
           <section
             className="
               py-16 px-[18px] md:py-[104px] md:px-8 bg-burgundy text-cream
@@ -1911,6 +1867,7 @@ export default function renderTemplate(vals: any) {
                     <a
                       href="https://instagram.com/caesy.foodny"
                       target="_blank"
+                      aria-label="Instagram @caesy.foodny"
                       data-reveal="zoom"
                       data-stagger=""
                       className="
@@ -2363,7 +2320,11 @@ export default function renderTemplate(vals: any) {
               </div>
             </div>
           </footer>
-          <div className="sticky bottom-0 h-0 z-40">
+          <div
+            className={`sticky bottom-0 h-0 z-40 transition-opacity duration-300 ${
+              waShow ? "opacity-100" : "opacity-0 pointer-events-none"
+            }`}
+          >
             <div
               className="
                 absolute right-[14px] md:right-7 bottom-4 md:bottom-7 flex
